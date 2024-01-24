@@ -6,11 +6,34 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:15:35 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/24 14:03:08 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:28:39 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	char	*cpy;
+	size_t	len;
+
+	len = 0;
+	while (src[len])
+		len++;
+	if (!size)
+		return (len);
+	cpy = (char *)src;
+	while ((size > 1) && (*cpy))
+	{
+		*dst = *cpy;
+		dst++;
+		cpy++;
+		size--;
+	}
+	if (*dst)
+		*dst = 0;
+	return (len);
+}
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
@@ -21,11 +44,15 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!s1 && !s2)
 		return (NULL);
 	else if (!s1)
-		return (ft_strdup(s2));
+		return (s2);
 	else if (!s2)
-		return (ft_strdup(s1));
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
+		return (s1);
+	len_s1 = 0;
+	while (s1[len_s1])
+		len_s1++;
+	len_s2 = 0;
+	while (s1[len_s2])
+		len_s2++;
 	ptr = malloc(sizeof(char) * (len_s1 + len_s2 + 1));
 	if (!ptr)
 		return (NULL);
