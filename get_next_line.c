@@ -6,13 +6,13 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:23:43 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/24 13:10:47 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:13:11 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	check_n(char *buffer)
+static int	check_n(char *buffer)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	check_n(char *buffer)
 	return (0);
 }
 
-void	read_fd(int fd, char *buffer)
+static void	read_fd(int fd, char *buffer)
 {
 	int	i;
 
