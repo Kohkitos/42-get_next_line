@@ -6,7 +6,7 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:23:43 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/24 13:13:11 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:20:01 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ static int	check_n(char *buffer)
 	return (0);
 }
 
-static void	read_fd(int fd, char *buffer)
+static char	*read_fd(int fd, char *buffer)
 {
-	int	i;
+	char	*res;
+	int		i;
 
 	if (!buffer)
 		buffer = 0;
@@ -44,9 +45,10 @@ static void	read_fd(int fd, char *buffer)
 char	*get_next_line(int fd)
 {
 	static char	*buffer;
+	char		*res;
 
 	if (fd < 0)
 		return (NULL);
-	read_fd(fd, buffer);
+	res = read_fd(fd, buffer);
 	return (NULL);
 }
