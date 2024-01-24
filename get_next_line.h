@@ -6,7 +6,7 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:22:19 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/24 13:18:24 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:55:36 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <limits.h>
 
 char	*get_next_line(int fd);
-char	*ft_strdup(const char *s);
+char	*ft_calloc(size_t nmemb, size_t size);
 
 #endif

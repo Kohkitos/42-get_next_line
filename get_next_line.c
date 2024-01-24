@@ -6,25 +6,11 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:23:43 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/24 13:25:19 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:20:14 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-static int	check_n(char *buffer)
-{
-	int	i;
-
-	i = 0;
-	while (buffer[i])
-	{
-		if (buffer[i] == '/n')
-			return (i);
-		i++;
-	}
-	return (0);
-}
 
 static char	*read_fd(int fd, char *buffer)
 {
@@ -32,16 +18,18 @@ static char	*read_fd(int fd, char *buffer)
 	int		i;
 
 	if (!buffer)
-		buffer = 0;
-	while (read(fd, buffer, BUFFER_SIZE) > 0)
+		buffer = ft_calloc(1, sizeof(char));
+	i = 1;
+	while (i > 0)
 	{
-		i = check_n(buffer);
-		if (i)
-			break ;
-		i = -1;
+		i = read(fd, buffer, BUFFER_SIZE);
+		if (i < 0)
+		{
+			free (buffer);
+			return (NULL);
+		}
 	}
-	buffer[i + 1] = '\0';
-	res = ft_strdup(buffer);
+	res = 0;
 	return (res);
 }
 
