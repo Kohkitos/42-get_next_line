@@ -6,46 +6,47 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:23:43 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/24 18:32:31 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/25 09:38:15 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static char	*read_fd(int fd, char *line)
 {
-	char	*res;
-	char	*buf;
+	char	buf[BUFFER_SIZE + 1];
 	int		i;
 
 	if (!line)
 		line = ft_calloc(1, sizeof(char));
-	buf = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	i = 1;
 	while (i > 0)
 	{
 		i = read(fd, buf, BUFFER_SIZE);
+		printf("%s\n", buf);
 		if (i < 0)
 		{
-			free (buf);
+			free (line);
 			return (NULL);
 		}
 		buf[i] = '\0';
-		res = ft_strjoin(res, buf);
-		if (ft_strchr(res, '\n'))
+		line = ft_strjoin(line, buf);
+		printf("%s\n", line);
+		if (ft_strchr(line, '\n'))
 			break ;
 	}
-	free(buf);
-	return (res);
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*line;
-	char		*res;
 
 	if (fd < 0 || BUFFER_SIZE < 0)
 		return (NULL);
-	res = read_fd(fd, line);
-	return (res);
+	line = read_fd(fd, line);
+	if (!line)
+		return (NULL);
+	return (line);
 }

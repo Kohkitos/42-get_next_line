@@ -6,13 +6,13 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:15:35 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/24 18:28:39 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/25 09:38:35 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+static size_t	ft_strlcpy(char *dst, char *src, size_t size)
 {
 	char	*cpy;
 	size_t	len;
@@ -35,29 +35,32 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (len);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *line, char *buffer)
 {
-	size_t	len_s1;
-	size_t	len_s2;
+	size_t	len_line;
+	size_t	len_buffer;
 	char	*ptr;
 
-	if (!s1 && !s2)
+	if (!line && !buffer)
 		return (NULL);
-	else if (!s1)
-		return (s2);
-	else if (!s2)
-		return (s1);
-	len_s1 = 0;
-	while (s1[len_s1])
-		len_s1++;
-	len_s2 = 0;
-	while (s1[len_s2])
-		len_s2++;
-	ptr = malloc(sizeof(char) * (len_s1 + len_s2 + 1));
-	if (!ptr)
-		return (NULL);
-	ft_strlcpy(ptr, s1, len_s1 + 1);
-	ft_strlcpy(ptr + len_s1, s2, len_s2 + 1);
+	else if (!line)
+	{
+		ptr = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
+		ft_strlcpy(ptr, buffer, BUFFER_SIZE + 1);
+		free (buffer);
+		return (ptr);
+	}
+	else if (!buffer)
+		return (line);
+	len_line = 0;
+	while (line[len_line])
+		len_line++;
+	len_buffer = 0;
+	while (line[len_buffer])
+		len_buffer++;
+	ptr = ft_calloc(sizeof(char), (len_line + len_buffer + 1));
+	ft_strlcpy(ptr, line, len_line + 1);
+	ft_strlcpy(ptr + len_line, buffer, len_buffer + 1);
 	return (ptr);
 }
 
