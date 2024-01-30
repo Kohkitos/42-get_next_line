@@ -6,7 +6,7 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:23:43 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/30 19:51:56 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:00:05 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ static char *function_name(char *line)
 	i = 0;
 	while (line[i] && line[i]!= '\n')
 		i++;
+	if (line[i] == '\0')
+		return (NULL);
+	res = ft_substr(line, i + 1, ft_strlen(line) - i);
+	if (!res)
+		free_all(res);
+	line[i + 1] = '\0';
+	return (res);
 }
 
 char	*get_next_line(int fd)
