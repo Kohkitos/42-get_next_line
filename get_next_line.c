@@ -6,7 +6,7 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:23:43 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/30 19:38:04 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:47:46 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ static char	*read_fd(int fd, char *buffer, char *prev_line)
 		line = prev_line;
 		prev_line = ft_strjoin(line, buffer);
 		free_all(line);
-		if (!prev_line)
-			return (NULL);
+		if (ft_strchr(buffer, '\n'))
+			break ;
 	}
+	return (prev_line);
 }
 
 char	*get_next_line(int fd)

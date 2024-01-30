@@ -6,7 +6,7 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:22:19 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/30 19:21:15 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:47:12 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,9 @@
 # include <stdint.h>
 
 char	*get_next_line(int fd);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
+char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strchr(const char *s, int c);
 
 #endif

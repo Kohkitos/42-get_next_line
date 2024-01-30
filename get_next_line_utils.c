@@ -6,7 +6,7 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:15:35 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/30 19:44:09 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:47:04 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	ptr[i + j] = '\0';
 	return (ptr);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	char			*cpy;
+	unsigned char	ch;
+
+	ch = (unsigned char)c;
+	cpy = (char *)s;
+	while ((*cpy != ch) && *cpy)
+		cpy++;
+	if (ch == *cpy)
+		return (cpy);
+	return (NULL);
 }
