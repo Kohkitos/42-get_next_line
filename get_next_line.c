@@ -6,47 +6,54 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:23:43 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/25 09:38:15 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:38:04 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-static char	*read_fd(int fd, char *line)
+static void	free_all(char *s)
 {
-	char	buf[BUFFER_SIZE + 1];
-	int		i;
+	free(s);
+	s = NULL;
+}
 
-	if (!line)
-		line = ft_calloc(1, sizeof(char));
+static char	*read_fd(int fd, char *buffer, char *prev_line)
+{
+	int		i;
+	char	*line;
+
 	i = 1;
-	while (i > 0)
+	while (i)
 	{
-		i = read(fd, buf, BUFFER_SIZE);
-		printf("%s\n", buf);
-		if (i < 0)
-		{
-			free (line);
+		i = read(fd, buffer, BUFFER_SIZE);
+		if (i == -1)
 			return (NULL);
-		}
-		buf[i] = '\0';
-		line = ft_strjoin(line, buf);
-		printf("%s\n", line);
-		if (ft_strchr(line, '\n'))
+		else if (i == 0)
 			break ;
+		buffer[i] = '\0';
+		if (!prev_line)
+			prev_line = ft_strdup("");
+		line = prev_line;
+		prev_line = ft_strjoin(line, buffer);
+		free_all(line);
+		if (!prev_line)
+			return (NULL);
 	}
-	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
+	char		*line;
+	char		*buffer;
+	static char	*prev_line;
 
-	if (fd < 0 || BUFFER_SIZE < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = read_fd(fd, line);
-	if (!line)
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
 		return (NULL);
-	return (line);
+	line = read_fd(fd, buffer, prev_line);
+	free_all(buffer);
 }
