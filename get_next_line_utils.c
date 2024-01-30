@@ -6,7 +6,7 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:15:35 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/30 20:00:56 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/30 20:01:19 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	while (s1[i])
 	{
-		ptr[i] == s1[i];
+		ptr[i] = s1[i];
 		i++;
 	}
 	j = 0;
