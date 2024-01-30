@@ -6,7 +6,7 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 13:15:35 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/30 19:47:04 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:58:26 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,28 @@ char	*ft_strchr(const char *s, int c)
 	if (ch == *cpy)
 		return (cpy);
 	return (NULL);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*ptr;
+	size_t	i;
+	size_t	j;
+
+	ptr = malloc(sizeof(char) * (len + 1));
+	if (!ptr)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s[i])
+	{
+		if (i >= start && j < len)
+		{
+			ptr[j] = s[i];
+			j++;
+		}
+		i++;
+	}
+	ptr[j] = 0;
+	return (ptr);
 }

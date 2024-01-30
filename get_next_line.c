@@ -6,7 +6,7 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:23:43 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/30 19:47:46 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/30 19:51:56 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ static char	*read_fd(int fd, char *buffer, char *prev_line)
 	return (prev_line);
 }
 
+static char *function_name(char *line)
+{
+	size_t	i;
+	char	*res;
+
+	i = 0;
+	while (line[i] && line[i]!= '\n')
+		i++;
+}
+
 char	*get_next_line(int fd)
 {
 	char		*line;
@@ -57,4 +67,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = read_fd(fd, buffer, prev_line);
 	free_all(buffer);
+	prev_line = function_name(line);
+	return (line);
 }
