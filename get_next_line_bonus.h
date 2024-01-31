@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:22:19 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/31 12:08:31 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:09:30 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
+# endif
+
+/* Max number of File Descriptors a Mac can handle accordin to google dot com*/
+# ifndef FDS
+#  define FDS 1024
 # endif
 
 # include <unistd.h>
@@ -24,7 +29,7 @@
 /*Main function*/
 char	*get_next_line(int fd);
 
-/*Auxiliary functions */
+/*Auxiliary functions*/
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);

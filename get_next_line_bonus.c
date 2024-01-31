@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:23:43 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/31 12:11:55 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/31 12:11:51 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*read_fd(int fd, char *buffer, char *prev_line)
 {
@@ -64,18 +64,18 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	char		*buffer;
-	static char	*prev_line;
+	static char	*prev_line[FDS];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
-	line = read_fd(fd, buffer, prev_line);
+	line = read_fd(fd, buffer, prev_line[fd]);
 	free(buffer);
 	buffer = NULL;
 	if (!line)
 		return (NULL);
-	prev_line = process_liney(line);
+	prev_line[fd] = process_liney(line);
 	return (line);
 }
