@@ -6,18 +6,12 @@
 /*   By: fsanz-go <fsanz-go@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 18:23:43 by fsanz-go          #+#    #+#             */
-/*   Updated: 2024/01/30 20:02:18 by fsanz-go         ###   ########.fr       */
+/*   Updated: 2024/01/31 10:57:53 by fsanz-go         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
-
-static void	free_all(char *s)
-{
-	free(s);
-	s = NULL;
-}
 
 static char	*read_fd(int fd, char *buffer, char *prev_line)
 {
@@ -37,14 +31,17 @@ static char	*read_fd(int fd, char *buffer, char *prev_line)
 			prev_line = ft_strdup("");
 		line = prev_line;
 		prev_line = ft_strjoin(line, buffer);
-		free_all(line);
+		free(line);
+		line = NULL;
+		if (!prev_line)
+			return (NULL);
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
 	return (prev_line);
 }
 
-static char	*function_name(char *line)
+static char	*process_line(char *line)
 {
 	size_t	i;
 	char	*res;
@@ -56,7 +53,10 @@ static char	*function_name(char *line)
 		return (NULL);
 	res = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (!res)
-		free_all(res);
+	{
+		free(res);
+		res = NULL;
+	}
 	line[i + 1] = '\0';
 	return (res);
 }
@@ -73,7 +73,10 @@ char	*get_next_line(int fd)
 	if (!buffer)
 		return (NULL);
 	line = read_fd(fd, buffer, prev_line);
-	free_all(buffer);
-	prev_line = function_name(line);
+	free(buffer);
+	buffer = NULL;
+	if (!line)
+		return (NULL);
+	prev_line = process_line(line);
 	return (line);
 }
