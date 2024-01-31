@@ -3,5 +3,5 @@ main.c
 a.out
 libft.a
 .vscode
-test.txt
+*.txt
 get_next_line.h.gch
