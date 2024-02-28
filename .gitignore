@@ -1,7 +1,9 @@
 obj/
 main.c
+main_bonus.c
 a.out
 libft.a
 .vscode
 *.txt
 get_next_line.h.gch
+.gitignore
